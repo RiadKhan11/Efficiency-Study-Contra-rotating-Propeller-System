@@ -1,13 +1,5 @@
 # Contra-Rotating Propeller System — Fortran
 
-Fortran implementation of the **self- and mutually induced velocity** calculations developed in the 2017 B.Sc. thesis **_Energy Study: Contra-rotating Propeller System_**, Department of Naval Architecture and Marine Engineering, Bangladesh University of Engineering and Technology (BUET).
-
-**Thesis authors:** Md Riad Khan and Shoeba Islam (2017).  
-**Academic supervisor acknowledged in the thesis:** Dr. Refayet Ullah.  
-**Purpose:** archive the original research program in a readable, buildable, and testable repository.
-
-> **Reproducibility note:** The published Fortran listing has an apparent `E1`/`E2` assignment error in the bound-vortex section. The default mode deliberately preserves that line because it best reproduces the thesis's published numerical tables. An opt-in `--corrected-bound-angle` mode implements the likely intended assignment, but **it has not been independently validated**. See [transcription and numerical notes](docs/TRANSCRIPTION_NOTES.md).
-
 ## What it calculates
 
 The program uses a lifting-line/circulation model with the **Biot–Savart law**. The flow induced by each propeller is represented through three vortex contributions:
@@ -22,8 +14,6 @@ Results are the non-dimensional axial (`UA/VS`), tangential (`UT/VS`), and radia
 2. Velocities mutually induced by the **fore** propeller at the **aft** propeller.
 3. Self-induced velocities at the **aft** propeller.
 4. Velocities mutually induced by the **aft** propeller at the **fore** propeller.
-
-The broader **thesis** also discusses blade-element efficiency and comparisons with a single propeller. **Those separate efficiency calculations are not implemented in this Fortran program**, which covers the induced velocities in Section 4.1.
 
 ## Quick start
 
@@ -50,7 +40,7 @@ The executable reads **`FA8.DAT` from its current working directory**; both outp
 
 ## Sample input
 
-See [`examples/typical-case/FA8.DAT`](examples/typical-case/FA8.DAT), transcribed from the thesis's **Section 4.2, page 33**. The input is **fixed-width** Fortran data, not comma-separated text. There are exactly **eight records** (four records for each propeller):
+See [`examples/typical-case/FA8.DAT`](examples/typical-case/FA8.DAT). The input is **fixed-width** Fortran data, not comma-separated text. There are exactly **eight records** (four records for each propeller):
 
 | Record | Content | Format |
 | --- | --- | --- |
