@@ -57,55 +57,6 @@ The first **five character positions** are skipped on every input line. The numb
 
 **Example geometry:** four blades on the fore propeller and five blades on the aft propeller. The original model hard-codes a fore/aft radius ratio of `0.933`, which is consistent with the approximate diameters in the thesis's design table (7 m / 6.531 m).
 
-## Reproducing the thesis
+## Citation
 
-The published table values from **Section 4.4, page 42** are included in [`docs/thesis_reference_output.csv`](docs/thesis_reference_output.csv). Run `make test` to perform:
-
-- a compile/run integration check;
-- verification of all 32 generated table rows and finite numeric values;
-- approximate numerical comparison against the thesis's tabulated values; and
-- a smoke test of the experimental correction mode.
-
-**Known limitation:** in the self-induced **fore** table, the axial component varies significantly relative to the published results for some stations. The bound-vortex calculation is nearly singular when the field point lies on the blade plane, and floating-point/compiler behavior appears to affect those terms. For this reason, the automated tests **do not assert a numerical match for those eight axial entries**; they do check all other table components. This is a faithful transcription exercise, **not a validation of the physical accuracy of the computational method**.
-
-## Repository layout
-
-```text
-.
-├── .github/workflows/fortran.yml    # GitHub Actions build and integration tests
-├── .gitignore
-├── Makefile
-├── README.md
-├── CITATION.cff                    # GitHub citation metadata
-├── src/contra_rotating_propeller.f90 # original calculation, formatted for modern compilers
-├── examples/typical-case/FA8.DAT    # thesis sample fixed-width input
-├── tests/test_example.py            # stdlib-only integration tests
-└── docs/
-    ├── thesis.pdf                   # full 2017 B.Sc. thesis
-    ├── thesis_reference_output.csv  # published Section 4.4 output
-    └── TRANSCRIPTION_NOTES.md       # provenance and computational caveats
-```
-
-## Research assumptions and limitations
-
-The thesis's model assumes each propeller blade can be represented by a bound vortex, a hub vortex, and a helical tip vortex. It considers slipstream interaction between the two propellers, but **does not model time-dependent blade-passing effects**. The sample program assumes two propellers with eight radial strips each, applies fixed numerical integration subdivisions, and is not a general-purpose CFD solver.
-
-The original thesis should be cited when reusing this research; see [`CITATION.cff`](CITATION.cff) and the [complete thesis](docs/thesis.pdf).
-
-## Authorship, permissions, and licensing
-
-The PDF is provided for academic documentation and source provenance. Original credit remains with the thesis's **two authors**. **No open-source license is asserted or included** because permission from all relevant rights holders has not been established. Before publicly publishing, distributing, or licensing the code and PDF, confirm permission from the coauthor and any institution with applicable rights, decide on an appropriate software license, and review the thesis PDF for personal information.
-
-## Publishing to GitHub
-
-Once you have reviewed the attribution, PDF inclusion, and licensing with your coauthor:
-
-```bash
-git init
-git add .
-git commit -m "Archive contra-rotating propeller Fortran thesis project"
-# With GitHub CLI installed and authenticated:
-gh repo create contra-rotating-propeller-fortran --private --source=. --remote=origin --push
-```
-
-The repository can be made public later if rights and sharing preferences permit. For an existing GitHub repository, add your remote and push in the usual way.
+Khan, M. R., Kundu, R., Rahaman, W., Haque, M. M., & Ullah, M. R. (2018). Efficiency study: Contra-rotating propeller system. In AIP Conference Proceedings (Vol. 1980, No. 1, Article 060001). International Conference on Mechanical Engineering (ICME 2017), Dhaka, Bangladesh. https://doi.org/10.1063/1.5044369 
