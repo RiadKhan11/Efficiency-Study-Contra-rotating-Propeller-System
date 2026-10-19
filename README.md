@@ -17,20 +17,6 @@ Results are the non-dimensional axial (`UA/VS`), tangential (`UT/VS`), and radia
 
 ## Quick start
 
-Requires **GNU Fortran (`gfortran`)**, `make`, and (for testing) Python 3. No external Fortran libraries.
-
-```bash
-# Ubuntu / Debian:
-sudo apt-get install gfortran make python3
-
-# In this repository:
-make             # compile to build/contra_rotating_propeller
-make run         # run the eight-line example, original printed-code behavior
-make test        # check program execution and published reference tables
-make run-corrected  # optional, experimental bound-vortex angle correction
-make clean       # remove generated outputs / build files
-```
-
 Running `make run` writes to `examples/typical-case/`:
 
 - **`FA8.OUT`** — detailed intermediate calculations for tip, hub, and bound vortices.
